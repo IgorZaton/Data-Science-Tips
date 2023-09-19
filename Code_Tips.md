@@ -6,6 +6,7 @@
 
 1. [Environment](#environment)
 2. [Code Style](#code-style)
+2. [Code Architecture](#code-architecture)
 
 ## Environment
 
@@ -96,3 +97,23 @@ visualizer = Visualizer(result.visualisation_artifacts)
 If format of specific field in dataclass is important as well, you can make another dataclass to store it.
 
 It’s much more readable (you’re not using indexes like result[2], result[420], which are pretty enigmatic) and provides you more control over the whole pipeline format.
+
+## Code Architecture
+
+** 1. Write your projects in modular form **
+
+There're two main phases of standard data science project: experimental phase and development phase. Of course, there might be another steps regarding the maintenance, but that's not always the thing. 
+
+If an experimental phase is not too long it's perfectly fine to use scripts. However, when you want to implement the solution you've developed you should think a little bit more about the code structure.
+
+And here comes the modularity that python offers. The idea is to think about the project like it was a lego construction.
+When you want to modularize your code, you should think what will be the biggest, high-level structure you can extract from the code, extract smaller parts from it and repeat the process until you'll end up with parts you cannot devide further in a sensible way anymore.
+It's similar to deconstruction of a lego build.
+
+Let's say your project is about detecting people from a CCTV. In that case your pipeline might look like this:
+
+> Read Image -> Preprocess Image -> Run Detection -> Calculate Metric -> Visualize Results -> Serialize Results
+
+The biggest structure here would be the whole process, we can call it `pipeline` or `flow_manager`. It can be splited to `data_loader`, `algorithm`, `metric`, `visualizer` and `serializer`. Going one step further, `algorithm` can be splitted to `preprocessor` and `detector`. 
+
+From implementation point of view, the idea is to create an abstract class for each extracted block and make a functional classes inherit from its.
