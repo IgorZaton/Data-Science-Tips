@@ -23,7 +23,7 @@ I think poetry is the best one I’ve worked with so far because:
 
 It’s possible there’s some other, better tool for package and dependency management, but what I like in poetry is simplicity and the fact that even an inexperienced user can start a project with it within a few minutes.
 
-### 2. Solve poetry.lock conflicts with regeneration of the file.
+### 2. Solve `poetry.lock` conflicts with regeneration of the file.
 
 If you’re working in a team, it’s possible you’ll bump into some conflicts regarding the environment. Solving it might be a little bit tricky, especially the .lock file case as it might be even a few thousand lines long.
 
@@ -98,9 +98,31 @@ If format of specific field in dataclass is important as well, you can make anot
 
 It’s much more readable (you’re not using indexes like result[2], result[420], which are pretty enigmatic) and provides you more control over the whole pipeline format.
 
+### 2. Limit module * imports with `__init__.py`
+
+As mentioned in tip 1 in Code Architecture section, you can limit module * imports by defining what can be imported and what cannot in the corresponding `__init__.py` file.
+
+Example:
+
+Directory tree:
+```md
+myproject
+├── src
+│   ├── detectors
+|     ├──__init__.py
+|     ├──BaseDetector.py
+|     └──YoloDetector.py
+|   ...
+│   └──
+...
+```
+If we'll leave `__init__.py` in the default form, everything in `BaseDetector.py` and `YoloDetector.py` will be imported when using *. That's okay in most cases. However, let's say we have some stuff in the `YoloDetector.py` besides the class we don't want to import with an asterisk. In that case we can import class in the `__init__.py` file and everything besides that will not be visible in imports hints nor imported with an asterisk.
+
+Learn about more `__init__.py` functionalities [here](https://climbtheladder.com/10-python-__init__-py-best-practices/).
+
 ## Code Architecture
 
-** 1. Write your projects in modular form **
+### 1. Write your projects in modular form
 
 There're two main phases of standard data science project: experimental phase and development phase. Of course, there might be another steps regarding the maintenance, but that's not always the thing. 
 
@@ -116,4 +138,6 @@ Let's say your project is about detecting people from a CCTV. In that case your 
 
 The biggest structure here would be the whole process, we can call it `pipeline` or `flow_manager`. It can be splited to `data_loader`, `algorithm`, `metric`, `visualizer` and `serializer`. Going one step further, `algorithm` can be splitted to `preprocessor` and `detector`. 
 
-From implementation point of view, the idea is to create an abstract class for each extracted block and make a functional classes inherit from its.
+From implementation point of view, the idea is to create an abstract class for each extracted block and make a functional classes inherit from it. Also to create module from your directory, you must add an `__init__.py` inside of it. By default it might be an empty file, but you can specify what should be visible during importing subpackages from this module simply by importing it in the `__init__.py` (see tip 2).
+
+To get more info about code modularization check out [inedo blog](https://blog.inedo.com/python/modularization-and-packages/).
