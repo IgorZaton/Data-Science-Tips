@@ -6,13 +6,13 @@
 
 1. [Environment](#environment)
 2. [Code Style](#code-style)
-2. [Code Architecture](#code-architecture)
+3. [Code Architecture](#code-architecture)
 
 ## Environment
 
 ### 1. Use poetry as your package manager
 
-There’re many package managers out there for you to use. You can use conda, pyenv or install packages globally with pip (god please no). From my experience the best solution for package/environment management is to use poetry.
+There are many package managers out there for you to use. You can use conda, pyenv or install packages globally with pip (god please no). From my experience the best solution for package/environment management is to use poetry.
 
 I think poetry is the best one I’ve worked with so far because:
 - It’s easy to start with, you can install it with pip using ```pip install poetry``` and ```poetry init``` to init your environment.
@@ -122,9 +122,9 @@ Learn about more `__init__.py` functionalities [here](https://climbtheladder.com
 
 ## Code Architecture
 
-### 1. Write your projects in modular form
+### 1. Write your projects in a modular form
 
-There're two main phases of standard data science project: experimental phase and development phase. Of course, there might be another steps regarding the maintenance, but that's not always the thing. 
+There are two main phases of standard data science project: experimental phase and development phase. Of course, there might be another steps regarding the maintenance, but that's not always the thing. 
 
 If an experimental phase is not too long it's perfectly fine to use scripts. However, when you want to implement the solution you've developed you should think a little bit more about the code structure.
 
