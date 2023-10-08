@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/IgorZaton/Data-Science-Tips/assets/50952749/6074bc6a-9749-4cee-83d8-13bf59f1b2dc" width="350" height="350"/>
+  <img src="https://github.com/IgorZaton/Data-Science-Tips/assets/50952749/309663fe-95ba-41b5-b2b3-b521bad74402" width="350" height="350"/>
 </p>
 
 ## Table of Contents
